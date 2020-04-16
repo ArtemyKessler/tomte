@@ -14,7 +14,7 @@
     name: 'SearchBar',
 
     data: () => ({
-      searchVal: "aa"
+      searchVal: ""
     }),
   }
 </script>
