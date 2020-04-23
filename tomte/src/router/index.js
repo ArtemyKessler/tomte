@@ -6,9 +6,18 @@ import store from "../store";
 Vue.use(VueRouter);
 
 const headerTextAliases = {
-  Home: "Sök",
-  About: "Information",
-  WishList: "Din Önskelista",
+  Home: {
+    text: "Sök",
+    isSearchBar: true,
+  },
+  About: {
+    text: "Information",
+    isSearchBar: false,
+  },
+  WishList: {
+    text: "Din Önskelista",
+    isSearchBar: true,
+  },
 };
 
 const routes = [
@@ -18,7 +27,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
+    path: "/about/:id",
     name: "About",
     component: () => import("../views/About.vue"),
     props: true,
@@ -36,8 +45,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const headerText = headerTextAliases[to.name];
-  store.commit("changePageHeaderText", headerText);
+  const headerInfo = headerTextAliases[to.name];
+  store.commit("changePageHeaderText", headerInfo);
   next();
 });
 

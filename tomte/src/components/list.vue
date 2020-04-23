@@ -1,7 +1,7 @@
 <template>
   <v-container class="list-container" fluid>
     <v-row dense>
-      <v-col v-for="card in this.cards" :key="card.title" :cols="card.flex">
+      <v-col v-for="card in this.cards" :key="card.id" :cols="card.flex">
         <v-card v-on:click="onCardClick(card)">
           <v-img
             :src="card.src"
@@ -35,9 +35,26 @@
 
 <style scoped>
   .list-container {
-    height: 70vh;
+    height: 90vh;
     width: 70vw;
     overflow-y: scroll;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    box-shadow: inset 0 0 5px grey;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 </style>
 
@@ -52,7 +69,7 @@
     },
     methods: {
       onCardClick: function(card) {
-        navigationActions.navigateToAbout({ card });
+        navigationActions.navigateToAbout(card.id);
       },
     },
   };

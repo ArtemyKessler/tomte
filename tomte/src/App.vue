@@ -6,7 +6,7 @@
         <v-divider class="mx-4" vertical></v-divider>
         <span class="subheading">{{ this.pageHeaderText }}</span>
       </div>
-      <SearchBar msg="sasat" class="search" />
+      <SearchBar v-if="this.isSearchBar" msg="sasat" class="search" />
 
       <v-spacer></v-spacer>
       <v-toolbar-items id="nav" class="hidden-sm-and-down">
@@ -14,13 +14,15 @@
 
         <v-divider vertical></v-divider>
 
-        <v-btn text>Handla om</v-btn>
-
-        <v-divider vertical></v-divider>
-
         <v-btn text>Önskelista</v-btn>
 
         <v-divider vertical></v-divider>
+
+        <v-btn text>Profil</v-btn>
+
+        <v-divider vertical></v-divider>
+
+        <v-btn text>Chatt</v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-content>
@@ -47,7 +49,7 @@
 
 <script>
   import SearchBar from "./components/searchBar";
-  import { mapMutations, mapState } from "vuex";
+  import { mapState } from "vuex";
 
   export default {
     name: "App",
@@ -60,7 +62,7 @@
       //
     }),
     computed: {
-      ...mapState(["pageHeaderText"]),
+      ...mapState(["pageHeaderText", "isSearchBar"]),
     },
     methods: {
       navigateToSearch: function() {
@@ -69,7 +71,7 @@
       navigateToWishList: function() {
         this.$router.push("/wishList");
       },
-      ...mapMutations(["changePageHeaderText"]),
+      // ...mapMutations(["changePageHeaderText"])
     },
   };
 </script>
