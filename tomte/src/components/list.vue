@@ -1,7 +1,7 @@
 <template>
   <v-container class="list-container" fluid>
     <v-row dense>
-      <v-col v-for="card in this.cards" :key="card.id" :cols="card.flex">
+      <v-col v-for="card in this.cards" :key="card.id" :cols="3">
         <v-card v-on:click="onCardClick(card)">
           <v-img
             :src="card.src"
@@ -34,43 +34,43 @@
 </template>
 
 <style scoped>
-  .list-container {
-    height: 90vh;
-    width: 70vw;
-    overflow-y: scroll;
-  }
+.list-container {
+  height: 90vh;
+  width: 70vw;
+  overflow-y: scroll;
+}
 
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    box-shadow: inset 0 0 5px grey;
-  }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  box-shadow: inset 0 0 5px grey;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 </style>
 
 <script>
-  import { mapState } from "vuex";
-  import navigationActions from "../router/navigationActions";
-  export default {
-    name: "itemList",
-    data: () => ({}),
-    computed: {
-      ...mapState(["cards"]),
-    },
-    methods: {
-      onCardClick: function(card) {
-        navigationActions.navigateToAbout(card.id);
-      },
-    },
-  };
+import { mapState } from "vuex";
+import navigationActions from "../router/navigationActions";
+export default {
+  name: "itemList",
+  data: () => ({}),
+  computed: {
+    ...mapState(["cards"])
+  },
+  methods: {
+    onCardClick: function(card) {
+      navigationActions.navigateToAbout(card.id);
+    }
+  }
+};
 </script>

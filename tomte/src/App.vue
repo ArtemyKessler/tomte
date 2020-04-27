@@ -14,7 +14,7 @@
 
         <v-divider vertical></v-divider>
 
-        <v-btn text>Önskelista</v-btn>
+        <v-btn v-on:click="navigateToWishList" text>Önskelista</v-btn>
 
         <v-divider vertical></v-divider>
 
@@ -32,46 +32,46 @@
 </template>
 
 <style lang="scss" scoped>
-  #nav {
-    a {
-      font-weight: bold;
-      color: whitesmoke;
-      &.router-link-exact-active {
-        color: #42b983;
-      }
+#nav {
+  a {
+    font-weight: bold;
+    color: whitesmoke;
+    &.router-link-exact-active {
+      color: #42b983;
     }
   }
+}
 
-  .search {
-    align-self: flex-start;
-  }
+.search {
+  align-self: flex-start;
+}
 </style>
 
 <script>
-  import SearchBar from "./components/searchBar";
-  import { mapState } from "vuex";
+import SearchBar from "./components/searchBar";
+import { mapState } from "vuex";
 
-  export default {
-    name: "App",
+export default {
+  name: "App",
 
-    components: {
-      SearchBar,
-    },
+  components: {
+    SearchBar
+  },
 
-    data: () => ({
-      //
-    }),
-    computed: {
-      ...mapState(["pageHeaderText", "isSearchBar"]),
+  data: () => ({
+    //
+  }),
+  computed: {
+    ...mapState(["pageHeaderText", "isSearchBar"])
+  },
+  methods: {
+    navigateToSearch: function() {
+      this.$router.push("/");
     },
-    methods: {
-      navigateToSearch: function() {
-        this.$router.push("/");
-      },
-      navigateToWishList: function() {
-        this.$router.push("/wishList");
-      },
-      // ...mapMutations(["changePageHeaderText"])
-    },
-  };
+    navigateToWishList: function() {
+      this.$router.push("/wishList");
+    }
+    // ...mapMutations(["changePageHeaderText"])
+  }
+};
 </script>

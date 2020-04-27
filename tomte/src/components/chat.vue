@@ -1,0 +1,68 @@
+<template>
+  <v-container class="chat-container my-2" fluid>
+    <div class="messages"></div>
+    <v-textarea auto-grow autocomplete rows="3" clearable></v-textarea>
+    <!-- <v-combobox
+        v-model="categorySelect"
+        :items="categoryItems"
+        label="Kategori"
+        clearable
+        multiple
+        small-chips
+      ></v-combobox>
+      <v-combobox
+        v-model="regionSelect"
+        :items="regionItems"
+        label="Län"
+        clearable
+        multiple
+        small-chips
+      ></v-combobox>
+      <v-combobox
+        v-model="tagSelect"
+        label="Tagg"
+        clearable
+        multiple
+        small-chips
+      ></v-combobox>
+      <v-btn @click="onSearchPress">HITTA ERBJUDANDEN</v-btn> -->
+  </v-container>
+</template>
+
+<style scoped>
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10vw;
+    height: 80vh;
+    background: slategrey;
+  }
+  .messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: royalblue;
+  }
+</style>
+
+<script>
+  export default {
+    name: "Filters",
+    data: () => ({
+      searchVal: "",
+      categorySelect: [],
+      categoryItems: ["Utrustning", "Möblerna", "Hushållsvaror", "Hobby"],
+      regionSelect: [],
+      regionItems: ["Stockholm", "Uppsala", "Örebro", "Östergötland"],
+      tagSelect: [],
+    }),
+    computed: {},
+    methods: {
+      onSearchPress: () => {
+        alert("жопа");
+      },
+    },
+  };
+</script>

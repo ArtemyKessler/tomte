@@ -5,7 +5,6 @@ const items = [
     title: "Iphone",
     src:
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
-    flex: 3,
     category: "Tech",
     tags: ["apple", "phones", "used"],
     place: "Uppsala",
@@ -14,7 +13,6 @@ const items = [
   {
     title: "Soffan",
     src: "https://arama.md/images/stories/vikatnoi.jpg",
-    flex: 3,
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
     place: "Kiruna",
@@ -23,7 +21,6 @@ const items = [
   {
     title: "Byxor",
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
-    flex: 3,
     category: "Kläder",
     tags: ["used", "branded"],
     place: "Malmö",
@@ -33,7 +30,6 @@ const items = [
     title: "Iphone 2",
     src:
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
-    flex: 3,
     category: "Tech",
     tags: ["apple", "phones", "used"],
     place: "Uppsala",
@@ -42,7 +38,6 @@ const items = [
   {
     title: "Soffan 2",
     src: "https://arama.md/images/stories/vikatnoi.jpg",
-    flex: 3,
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
     place: "Kiruna",
@@ -51,7 +46,6 @@ const items = [
   {
     title: "Byxor 2",
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
-    flex: 3,
     category: "Kläder",
     tags: ["used", "branded"],
     place: "Malmö",
@@ -61,7 +55,6 @@ const items = [
     title: "Iphone 3",
     src:
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
-    flex: 3,
     category: "Tech",
     tags: ["apple", "phones", "used"],
     place: "Uppsala",
@@ -70,7 +63,6 @@ const items = [
   {
     title: "Soffan 3",
     src: "https://arama.md/images/stories/vikatnoi.jpg",
-    flex: 3,
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
     place: "Kiruna",
@@ -79,7 +71,6 @@ const items = [
   {
     title: "Byxor 3",
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
-    flex: 3,
     category: "Kläder",
     tags: ["used", "branded"],
     place: "Malmö",
@@ -87,4 +78,14 @@ const items = [
   },
 ];
 
-export default { items };
+const wishListFilters = [
+  {
+    title: "Apple",
+    category: "Kläder",
+    tags: ["used", "branded", "good condition"],
+    place: "Malmö",
+    id: "111",
+  },
+];
+
+export default { items, wishListFilters };

@@ -15,7 +15,7 @@ const headerTextAliases = {
     isSearchBar: false,
   },
   WishList: {
-    text: "Din Önskelista",
+    text: "Önskelista",
     isSearchBar: true,
   },
 };
@@ -30,7 +30,6 @@ const routes = [
     path: "/about/:id",
     name: "About",
     component: () => import("../views/About.vue"),
-    props: true,
   },
   {
     path: "/wishList",
