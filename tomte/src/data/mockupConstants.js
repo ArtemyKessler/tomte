@@ -1,4 +1,6 @@
-// import { v1 as uuidv1 } from "uuid";
+export const categories = ["Utrustning", "Möblerna", "Hushållsvaror", "Hobby"];
+
+export const regions = ["Stockholm", "Uppsala", "Örebro", "Östergötland"];
 
 const items = [
   {
@@ -7,7 +9,7 @@ const items = [
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
     category: "Tech",
     tags: ["apple", "phones", "used"],
-    place: "Uppsala",
+    region: "Uppsala",
     id: "1212",
   },
   {
@@ -15,7 +17,7 @@ const items = [
     src: "https://arama.md/images/stories/vikatnoi.jpg",
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
-    place: "Kiruna",
+    region: "Kiruna",
     id: "2323",
   },
   {
@@ -23,7 +25,7 @@ const items = [
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
     category: "Kläder",
     tags: ["used", "branded"],
-    place: "Malmö",
+    region: "Malmö",
     id: "3434",
   },
   {
@@ -32,7 +34,7 @@ const items = [
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
     category: "Tech",
     tags: ["apple", "phones", "used"],
-    place: "Uppsala",
+    region: "Uppsala",
     id: "4545",
   },
   {
@@ -40,7 +42,7 @@ const items = [
     src: "https://arama.md/images/stories/vikatnoi.jpg",
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
-    place: "Kiruna",
+    region: "Kiruna",
     id: "5656",
   },
   {
@@ -48,7 +50,7 @@ const items = [
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
     category: "Kläder",
     tags: ["used", "branded"],
-    place: "Malmö",
+    region: "Malmö",
     id: "6767",
   },
   {
@@ -57,7 +59,7 @@ const items = [
       "https://www.ixbt.com/img/n1/news/2020/3/6/Big-iPhone-12-Pro-leak-details-64MP-cameras-bigger-battery-notch-plans-5G-and-more_large.jpg",
     category: "Tech",
     tags: ["apple", "phones", "used"],
-    place: "Uppsala",
+    region: "Uppsala",
     id: "7878",
   },
   {
@@ -65,7 +67,7 @@ const items = [
     src: "https://arama.md/images/stories/vikatnoi.jpg",
     category: "Mobler",
     tags: ["hushållsvaror", "new"],
-    place: "Kiruna",
+    region: "Kiruna",
     id: "8989",
   },
   {
@@ -73,18 +75,25 @@ const items = [
     src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
     category: "Kläder",
     tags: ["used", "branded"],
-    place: "Malmö",
+    region: "Malmö",
     id: "9090",
   },
 ];
 
 const wishListFilters = [
   {
-    title: "Apple",
+    title: "Gucci",
     category: "Kläder",
     tags: ["used", "branded", "good condition"],
-    place: "Malmö",
+    region: "Malmö",
     id: "111",
+  },
+  {
+    title: "Apple",
+    category: "Tech",
+    tags: ["used", "branded", "medium condition"],
+    region: "Visby",
+    id: "222",
   },
 ];
 

@@ -1,7 +1,12 @@
 <template>
   <div class="wishlist-container">
-    <Filters class="filters" />
-    <WishListItems class="wishList" />
+    <Filters
+      :filters="this.filtersToEdit"
+      :applyFilters="this.updateFilter"
+      isStringSearch
+      class="filters"
+    />
+    <WishListItems :pickFilterToChange="this.pickFilterToChange" class="wishList" />
   </div>
 </template> 
 
@@ -25,11 +30,30 @@
 <script>
 import Filters from "../components/filters";
 import WishListItems from "../components/wishListItems";
+import {
+  updateFilterInWishList,
+  addFilterToWishList
+} from "../data/mockupRequests";
 export default {
   name: "WishList",
   components: {
     Filters,
     WishListItems
+  },
+  data: () => ({
+    filtersToEdit: {}
+  }),
+  methods: {
+    pickFilterToChange: function(data) {
+      this.filtersToEdit = data;
+    },
+    updateFilter: function(data) {
+      if (data.id) {
+        updateFilterInWishList(data);
+      } else {
+        addFilterToWishList(data);
+      }
+    }
   }
 };
 </script>

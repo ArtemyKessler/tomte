@@ -5,7 +5,7 @@
     </v-img>
     <v-card-subtitle class="pb-0">Kategori: {{ this.lastOpenedCard.category }}</v-card-subtitle>
     <v-card-text class="text--primary">
-      <div>Staden: {{ this.lastOpenedCard.place }}</div>
+      <div>Staden: {{ this.lastOpenedCard.region }}</div>
     </v-card-text>
     <v-chip-group column class="chipGroup">
       <v-chip v-for="tag in this.lastOpenedCard.tags" :key="tag">
@@ -15,7 +15,7 @@
       </v-chip>
     </v-chip-group>
     <v-card-actions>
-      <v-btn v-on:click="toggleChat" color="orange" text>
+      <v-btn v-on:click="this.toggleChat" color="orange" text>
         {{
         this.isChatOpened ? "Sluta Chatta" : "Börja Chatta"
         }}
@@ -36,41 +36,22 @@
 </style>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import { refreshItem } from "../data/mockupRequests";
-import Chat from "../components/chat";
-import LastSeen from "../components/lastSeen";
-import AboutCard from "../components/AboutCard";
+import { mapState } from "vuex";
 
 export default {
-  name: "About",
+  name: "AboutCard",
+  props: {
+    toggleChat: Function
+  },
   computed: {
-    ...mapState(["lastOpenedCard", "lastSeenCards"]),
-    isLastSeenNotEmpty: function() {
-      return this.lastSeenCards.length > 0;
-    }
+    ...mapState(["lastOpenedCard"])
   },
   data: function() {
     return {
       isChatOpened: false
     };
   },
-  components: {
-    Chat,
-    LastSeen,
-    AboutCard
-  },
-  created: function() {
-    refreshItem(this.$route.params.id);
-  },
-  updated: function() {},
-  beforeDestroy: function() {
-    this.setLastSeenCards();
-  },
   methods: {
-    toggleChat: function() {
-      this.isChatOpened = !this.isChatOpened;
-    },
     copyToClipboard: function() {
       navigator.clipboard
         .writeText(window.location)
@@ -78,8 +59,7 @@ export default {
         .catch(err => {
           console.log("Something went wrong", err);
         });
-    },
-    ...mapMutations(["setLastSeenCards"])
+    }
   }
 };
 </script>

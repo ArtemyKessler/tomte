@@ -6,7 +6,7 @@
         <v-divider class="mx-4" vertical></v-divider>
         <span class="subheading">{{ this.pageHeaderText }}</span>
       </div>
-      <SearchBar v-if="this.isSearchBar" msg="sasat" class="search" />
+      <SearchBar v-if="this.isSearchBar" v-model="searchValue" msg="sasat" class="search" />
 
       <v-spacer></v-spacer>
       <v-toolbar-items id="nav" class="hidden-sm-and-down">
@@ -59,7 +59,7 @@ export default {
   },
 
   data: () => ({
-    //
+    searchValue: ""
   }),
   computed: {
     ...mapState(["pageHeaderText", "isSearchBar"])

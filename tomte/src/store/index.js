@@ -1,14 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import ChatModule from "./ChatModule";
 import constants from "../data/mockupConstants";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules: {
-    chat: ChatModule,
-  },
+  modules: {},
   state: {
     isSearchBar: true,
     pageHeaderText: "Sök",
@@ -38,6 +35,16 @@ const store = new Vuex.Store({
           state.lastSeenCards = [card, ...state.lastSeenCards];
         }
       }
+    },
+    updateFilterInWishList(state, data) {
+      const newWishList = [
+        data,
+        ...state.wishListFilters.filter((item) => item.id !== data.id),
+      ];
+      state.wishListFilters = newWishList;
+    },
+    addFilterToWishList(state, data) {
+      state.wishListFilters = [data, ...state.wishListFilters];
     },
   },
 });

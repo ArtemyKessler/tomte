@@ -1,13 +1,13 @@
 <template>
   <div class="about">
     <div class="d-flex my-2">
-      <v-card v-if="this.lastOpenedCard" class="mx-5 my-2" max-width="400">
+      <!-- <v-card v-if="this.lastOpenedCard" class="mx-5 my-2" max-width="400">
         <v-img class="white--text align-end" height="50vh" :src="this.lastOpenedCard.src">
           <v-card-title class="itemTitle" v-text="this.lastOpenedCard.title"></v-card-title>
         </v-img>
         <v-card-subtitle class="pb-0">Kategori: {{ this.lastOpenedCard.category }}</v-card-subtitle>
         <v-card-text class="text--primary">
-          <div>Staden: {{ this.lastOpenedCard.place }}</div>
+          <div>Staden: {{ this.lastOpenedCard.region }}</div>
         </v-card-text>
         <v-chip-group column class="chipGroup">
           <v-chip v-for="tag in this.lastOpenedCard.tags" :key="tag">
@@ -24,7 +24,8 @@
           </v-btn>
           <v-btn v-on:click="copyToClipboard" color="orange" text>Dela Länk</v-btn>
         </v-card-actions>
-      </v-card>
+      </v-card>-->
+      <AboutCard :toggleChat="this.toggleChat"></AboutCard>
       <Chat v-if="this.isChatOpened"></Chat>
       <LastSeen max-width="100" v-if="this.isLastSeenNotEmpty"></LastSeen>
       <div></div>
@@ -47,6 +48,7 @@ import { mapState, mapMutations } from "vuex";
 import { refreshItem } from "../data/mockupRequests";
 import Chat from "../components/chat";
 import LastSeen from "../components/lastSeen";
+import AboutCard from "../components/AboutCard";
 
 export default {
   name: "About",
@@ -63,7 +65,8 @@ export default {
   },
   components: {
     Chat,
-    LastSeen
+    LastSeen,
+    AboutCard
   },
   created: function() {
     refreshItem(this.$route.params.id);

@@ -1,7 +1,7 @@
 <template>
   <v-container class="list-container mx-1 my-2">
     <div v-for="card in this.lastSeenCards" :key="card.id">
-      <v-card class="my-1" v-on:click="onCardClick(card)">
+      <v-card class="lastSeenCard" v-on:click="onCardClick(card)">
         <v-img
           :src="card.src"
           class="white--text"
@@ -31,6 +31,11 @@
   height: 80vh;
   width: 20vw;
   overflow-y: scroll;
+  padding-top: 0px;
+}
+
+.lastSeenCard {
+  margin-bottom: 10px;
 }
 
 .card-footer {
