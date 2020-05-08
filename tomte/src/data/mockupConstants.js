@@ -2,6 +2,12 @@ export const categories = ["Utrustning", "Möblerna", "Hushållsvaror", "Hobby"]
 
 export const regions = ["Stockholm", "Uppsala", "Örebro", "Östergötland"];
 
+const userInfo = {
+  userPic:
+    "https://sun9-52.userapi.com/c854524/v854524458/7b99a/nr_vcuhB8Vk.jpg",
+  region: "Stockholm",
+};
+
 const items = [
   {
     title: "Iphone",
@@ -78,6 +84,14 @@ const items = [
     region: "Malmö",
     id: "9090",
   },
+  {
+    title: "Byxor 4",
+    src: "https://www.mkostum.ru/media/productimages/bryki/26-1_fEtTOnh.jpg",
+    category: "Kläder",
+    tags: ["used", "branded"],
+    region: "Malmö",
+    id: "0000",
+  },
 ];
 
 const wishListFilters = [
@@ -97,4 +111,4 @@ const wishListFilters = [
   },
 ];
 
-export default { items, wishListFilters };
+export default { items, wishListFilters, userInfo };

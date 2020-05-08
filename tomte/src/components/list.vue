@@ -1,5 +1,5 @@
 <template>
-  <v-container class="list-container" fluid>
+  <v-container v-on:scroll="onScroll" ref="listContainer" class="list-container" fluid>
     <v-row dense>
       <v-col v-for="card in this.cards" :key="card.id" :cols="3">
         <v-card v-on:click="onCardClick(card)">
@@ -35,7 +35,7 @@
 
 <style scoped>
 .list-container {
-  height: 90vh;
+  max-height: 90vh;
   width: 70vw;
   overflow-y: scroll;
 }
@@ -59,17 +59,43 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import navigationActions from "../router/navigationActions";
 export default {
   name: "itemList",
-  data: () => ({}),
+  props: {
+    onEndReached: Function
+  },
+  data: () => ({
+    lastScroll: 0
+  }),
   computed: {
-    ...mapState(["cards"])
+    ...mapState(["cards", "lastScrollPosition"])
   },
   methods: {
     onCardClick: function(card) {
       navigationActions.navigateToAbout(card.id);
+    },
+    onScroll({ target: { scrollTop, clientHeight, scrollHeight } }) {
+      this.lastScroll = scrollTop;
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.onEndReached();
+      }
+    },
+    ...mapMutations(["setLastScrollPosition"])
+  },
+  mounted: function() {
+    this.$refs.listContainer.scrollTop = this.lastScrollPosition;
+    this.lastScroll = this.lastScrollPosition;
+  },
+  beforeDestroy: function() {
+    this.setLastScrollPosition(this.lastScroll);
+  },
+  watch: {
+    cards: function(newVal, oldVal) {
+      if (newVal.length <= oldVal.length) {
+        this.$refs.listContainer.scrollTop = 0;
+      }
     }
   }
 };

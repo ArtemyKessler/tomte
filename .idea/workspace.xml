@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1b2db7d6-10c2-4420-a023-0fa4f6c8f636" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/tomte/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tomte/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tomte/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/tomte/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tomte/src/views/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/tomte/src/views/About.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tomte/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/tomte/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1b7F3Ss4YRxeOmZqLKdreI23uH9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b2db7d6-10c2-4420-a023-0fa4f6c8f636" name="Default Changelist" comment="" />
+      <created>1587975052152</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587975052152</updated>
+    </task>
+    <servers />
+  </component>
+</project>

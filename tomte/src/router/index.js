@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Login from "../views/Login";
 import store from "../store";
+import { ROUTE_ALIAS } from "./RoutesAlias";
 
 Vue.use(VueRouter);
 
@@ -18,13 +19,22 @@ const headerTextAliases = {
     text: "Önskelista",
     isSearchBar: true,
   },
+  Profile: {
+    text: "Redigera Profil",
+    isSearchBar: false,
+  },
 };
 
 const routes = [
   {
     path: "/",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/home",
     name: "Home",
-    component: Home,
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/about/:id",
@@ -37,6 +47,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/WishList.vue"),
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("../views/ProfileEdit.vue"),
+  },
 ];
 
 const router = new VueRouter({
@@ -44,9 +59,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const headerInfo = headerTextAliases[to.name];
-  store.commit("changePageHeaderText", headerInfo);
-  next();
+  if (to !== from) {
+    const headerInfo = headerTextAliases[to.name];
+    if (to.path !== ROUTE_ALIAS.LOGIN) {
+      store.commit("changePageHeaderText", headerInfo);
+    }
+    next();
+  }
 });
 
 export default router;

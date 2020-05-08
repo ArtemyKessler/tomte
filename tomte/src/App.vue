@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar v-if="this.isInsideApp" app color="primary" dark>
       <div class="d-flex align-center">
         <v-toolbar-title>Tomte</v-toolbar-title>
         <v-divider class="mx-4" vertical></v-divider>
@@ -10,7 +10,7 @@
 
       <v-spacer></v-spacer>
       <v-toolbar-items id="nav" class="hidden-sm-and-down">
-        <v-btn v-on:click="navigateToSearch" text>Sök</v-btn>
+        <v-btn v-on:click="navigateToHome" text>Sök</v-btn>
 
         <v-divider vertical></v-divider>
 
@@ -18,7 +18,7 @@
 
         <v-divider vertical></v-divider>
 
-        <v-btn text>Profil</v-btn>
+        <v-btn v-on:click="navigateToProfile" text>Profil</v-btn>
 
         <v-divider vertical></v-divider>
 
@@ -50,6 +50,8 @@
 <script>
 import SearchBar from "./components/searchBar";
 import { mapState } from "vuex";
+import navigationActions from "./router/navigationActions";
+import { ROUTE_ALIAS } from "./router/RoutesAlias";
 
 export default {
   name: "App",
@@ -62,16 +64,21 @@ export default {
     searchValue: ""
   }),
   computed: {
-    ...mapState(["pageHeaderText", "isSearchBar"])
+    ...mapState(["pageHeaderText", "isSearchBar"]),
+    isInsideApp: function() {
+      return this.$route.path !== ROUTE_ALIAS.LOGIN;
+    }
   },
   methods: {
-    navigateToSearch: function() {
-      this.$router.push("/");
+    navigateToHome: function() {
+      navigationActions.navigateToHome();
     },
     navigateToWishList: function() {
-      this.$router.push("/wishList");
+      navigationActions.navigateToWishList();
+    },
+    navigateToProfile: function() {
+      navigationActions.navigateToProfile();
     }
-    // ...mapMutations(["changePageHeaderText"])
   }
 };
 </script>

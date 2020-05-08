@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Filters :applyFilters="searchWithFilters" class="filters" />
-    <ItemList class="itemList" />
+    <ItemList :onEndReached="loadMoreItemsToMainList" class="itemList" />
   </div>
 </template>
 
@@ -11,7 +11,6 @@
   height: 100%;
   display: grid;
   grid-template-areas: "filters list";
-  /* grid-template-rows: 1fr 4fr; */
   grid-template-columns: 1fr 3fr;
   grid-column-gap: 10px;
 }
@@ -26,6 +25,7 @@
 <script>
 import Filters from "../components/filters";
 import ItemList from "../components/list";
+import { loadMoreItems } from "../data/mockupRequests";
 export default {
   name: "Home",
   components: {
@@ -36,6 +36,9 @@ export default {
     searchWithFilters: function(filters) {
       alert("жепка");
       console.log("filters", filters);
+    },
+    loadMoreItemsToMainList: function() {
+      loadMoreItems();
     }
   }
 };

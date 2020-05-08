@@ -1,31 +1,10 @@
 <template>
   <div class="about">
     <div class="d-flex my-2">
-      <!-- <v-card v-if="this.lastOpenedCard" class="mx-5 my-2" max-width="400">
-        <v-img class="white--text align-end" height="50vh" :src="this.lastOpenedCard.src">
-          <v-card-title class="itemTitle" v-text="this.lastOpenedCard.title"></v-card-title>
-        </v-img>
-        <v-card-subtitle class="pb-0">Kategori: {{ this.lastOpenedCard.category }}</v-card-subtitle>
-        <v-card-text class="text--primary">
-          <div>Staden: {{ this.lastOpenedCard.region }}</div>
-        </v-card-text>
-        <v-chip-group column class="chipGroup">
-          <v-chip v-for="tag in this.lastOpenedCard.tags" :key="tag">
-            {{
-            tag
-            }}
-          </v-chip>
-        </v-chip-group>
-        <v-card-actions>
-          <v-btn v-on:click="toggleChat" color="orange" text>
-            {{
-            this.isChatOpened ? "Sluta Chatta" : "Börja Chatta"
-            }}
-          </v-btn>
-          <v-btn v-on:click="copyToClipboard" color="orange" text>Dela Länk</v-btn>
-        </v-card-actions>
-      </v-card>-->
-      <AboutCard :toggleChat="this.toggleChat"></AboutCard>
+      <AboutCard
+        :toggleChat="this.toggleChat"
+        :isChatOpened="this.isChatOpened"
+      ></AboutCard>
       <Chat v-if="this.isChatOpened"></Chat>
       <LastSeen max-width="100" v-if="this.isLastSeenNotEmpty"></LastSeen>
       <div></div>
@@ -34,66 +13,66 @@
 </template>
 
 <style lang="css" scoped>
-.chipGroup {
-  margin-left: 1vw;
-}
+  .chipGroup {
+    margin-left: 1vw;
+  }
 
-.itemTitle {
-  mix-blend-mode: difference;
-}
+  .itemTitle {
+    mix-blend-mode: difference;
+  }
 </style>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import { refreshItem } from "../data/mockupRequests";
-import Chat from "../components/chat";
-import LastSeen from "../components/lastSeen";
-import AboutCard from "../components/AboutCard";
+  import { mapState, mapMutations } from "vuex";
+  import { refreshItem } from "../data/mockupRequests";
+  import Chat from "../components/chat";
+  import LastSeen from "../components/lastSeen";
+  import AboutCard from "../components/AboutCard";
 
-export default {
-  name: "About",
-  computed: {
-    ...mapState(["lastOpenedCard", "lastSeenCards"]),
-    isLastSeenNotEmpty: function() {
-      return this.lastSeenCards.length > 0;
-    }
-  },
-  data: function() {
-    return {
-      isChatOpened: false
-    };
-  },
-  components: {
-    Chat,
-    LastSeen,
-    AboutCard
-  },
-  created: function() {
-    refreshItem(this.$route.params.id);
-  },
-  updated: function() {},
-  beforeDestroy: function() {
-    this.setLastSeenCards();
-  },
-  methods: {
-    toggleChat: function() {
-      this.isChatOpened = !this.isChatOpened;
+  export default {
+    name: "About",
+    computed: {
+      ...mapState(["lastOpenedCard", "lastSeenCards"]),
+      isLastSeenNotEmpty: function() {
+        return this.lastSeenCards.length > 0;
+      },
     },
-    copyToClipboard: function() {
-      navigator.clipboard
-        .writeText(window.location)
-        .then(() => {})
-        .catch(err => {
-          console.log("Something went wrong", err);
-        });
+    data: function() {
+      return {
+        isChatOpened: false,
+      };
     },
-    ...mapMutations(["setLastSeenCards"])
-  },
-  watch: {
-    $route(to) {
+    components: {
+      Chat,
+      LastSeen,
+      AboutCard,
+    },
+    created: function() {
+      refreshItem(this.$route.params.id);
+    },
+    updated: function() {},
+    beforeDestroy: function() {
       this.setLastSeenCards();
-      refreshItem(to.params.id);
-    }
-  }
-};
+    },
+    methods: {
+      toggleChat: function() {
+        this.isChatOpened = !this.isChatOpened;
+      },
+      copyToClipboard: function() {
+        navigator.clipboard
+          .writeText(window.location)
+          .then(() => {})
+          .catch((err) => {
+            console.log("Something went wrong", err);
+          });
+      },
+      ...mapMutations(["setLastSeenCards"]),
+    },
+    watch: {
+      $route(to) {
+        this.setLastSeenCards();
+        refreshItem(to.params.id);
+      },
+    },
+  };
 </script>

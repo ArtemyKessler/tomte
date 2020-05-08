@@ -1,11 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import constants from "../data/mockupConstants";
+import UserModule from "./UserModule";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules: {},
+  modules: {
+    UserModule,
+  },
   state: {
     isSearchBar: true,
     pageHeaderText: "Sök",
@@ -13,6 +16,7 @@ const store = new Vuex.Store({
     cards: constants.items,
     lastSeenCards: [],
     wishListFilters: constants.wishListFilters,
+    lastScrollPosition: 0,
   },
   mutations: {
     changePageHeaderText(state, info) {
@@ -45,6 +49,15 @@ const store = new Vuex.Store({
     },
     addFilterToWishList(state, data) {
       state.wishListFilters = [data, ...state.wishListFilters];
+    },
+    addItems(state, data) {
+      state.cards = [...state.cards, ...data];
+    },
+    refreshFirstPageItems(state, data) {
+      state.cards = data;
+    },
+    setLastScrollPosition(state, data) {
+      state.lastScrollPosition = data;
     },
   },
 });
