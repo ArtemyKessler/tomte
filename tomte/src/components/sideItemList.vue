@@ -1,6 +1,6 @@
 <template>
   <v-container class="list-container mx-1 my-2">
-    <div v-for="card in this.lastSeenCards" :key="card.id">
+    <div v-for="card in this.cards" :key="card.id">
       <v-card class="lastSeenCard" v-on:click="onCardClick(card)">
         <v-img
           :src="card.src"
@@ -61,13 +61,12 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
 import navigationActions from "../router/navigationActions";
 export default {
-  name: "itemList",
+  name: "SideItemList",
   data: () => ({}),
-  computed: {
-    ...mapState(["lastSeenCards"])
+  props: {
+    cards: Array
   },
   methods: {
     onCardClick: function(card) {

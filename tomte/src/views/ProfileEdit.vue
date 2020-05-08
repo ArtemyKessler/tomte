@@ -1,32 +1,45 @@
 <template>
   <v-container class="profileContainer mx-auto">
-    <ProfileInputs></ProfileInputs>
+    <ProfileInputs :userState="this.userState"></ProfileInputs>
+    <SideItemList v-if="this.isMyOffersNotEmpty" :cards="this.myOffers"></SideItemList>
   </v-container>
 </template>
 
 <style lang="css" scoped>
-  .profileContainer {
-    display: flex;
-    flex-direction: column;
-  }
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+}
 </style>
 
 <script>
-  import ProfileInputs from "../components/ProfileInputs";
+import { mapState } from "vuex";
+import ProfileInputs from "../components/ProfileInputs";
+import SideItemList from "../components/sideItemList";
 
-  export default {
-    name: "Profile",
-    computed: {},
-    data: function() {
-      return {};
+export default {
+  name: "Profile",
+  computed: {
+    ...mapState(["UserModule"]),
+    userState: function() {
+      return this.UserModule;
     },
-    components: {
-      ProfileInputs,
+    myOffers: function() {
+      return this.userState.myOffers;
     },
-    created: function() {},
-    updated: function() {},
-    beforeDestroy: function() {},
-    methods: {},
-    watch: {},
-  };
+    isMyOffersNotEmpty: function() {
+      return this.myOffers.length > 0;
+    }
+  },
+  data: function() {
+    return {};
+  },
+  components: {
+    ProfileInputs,
+    SideItemList
+  },
+  mounted: function() {},
+  methods: {},
+  watch: {}
+};
 </script>
