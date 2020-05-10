@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login";
 import store from "../store";
-import { ROUTE_ALIAS } from "./RoutesAlias";
+import { isInsideTheApp } from "./RoutesAlias";
 
 Vue.use(VueRouter);
 
@@ -30,6 +30,21 @@ const routes = [
     path: "/",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("../views/Register.vue"),
+  },
+  {
+    path: "/forgotPassword",
+    name: "ForgotPassword",
+    component: () => import("../views/ForgotPassword.vue"),
+  },
+  {
+    path: "/setNewPassword",
+    name: "ChangePassword",
+    component: () => import("../views/SetNewPassword.vue"),
   },
   {
     path: "/home",
@@ -61,7 +76,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to !== from) {
     const headerInfo = headerTextAliases[to.name];
-    if (to.path !== ROUTE_ALIAS.LOGIN) {
+    if (isInsideTheApp(to.path)) {
       store.commit("changePageHeaderText", headerInfo);
     }
     next();

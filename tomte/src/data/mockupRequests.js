@@ -2,7 +2,12 @@ import store from "../store/index";
 import { v1 as uuidv1 } from "uuid";
 import constants from "../data/mockupConstants";
 import mockupConstants from "../data/mockupConstants";
-import { emailValidation, passwordValidation } from "../utils/validations";
+import {
+  emailValidation,
+  passwordValidation,
+  codeValidation,
+  loginValidation,
+} from "../utils/validations";
 
 export const login = (data) => {
   let isSuccessfullyLoged = true;
@@ -15,6 +20,42 @@ export const login = (data) => {
     isSuccessfullyLoged = false;
   }
   return isSuccessfullyLoged;
+};
+
+export const register = (data) => {
+  const isValidEmail = emailValidation(data.email);
+  const isValidLogin = loginValidation(data.login);
+  const isValidPassword = passwordValidation(data.password);
+  const isValidConfirmPassword = passwordValidation(data.confirmPassword);
+  const isPasswordsMatch = data.password === data.confirmPassword;
+  const isValidData =
+    isValidEmail &&
+    isValidLogin &&
+    isValidPassword &&
+    isValidConfirmPassword &&
+    isPasswordsMatch;
+  return isValidData;
+};
+
+export const sentForgotPasswordEmail = (email) => {
+  if (emailValidation(email)) {
+    return true;
+  } else {
+    alert("E-postadressen är felaktig");
+  }
+};
+
+export const changePassword = (data) => {
+  const isValidCode = codeValidation(data.code);
+  const isValidPassword = passwordValidation(data.password);
+  const isValidConfirmPassword = passwordValidation(data.confirmPassword);
+  const isPasswordsMatch = data.password === data.confirmPassword;
+  const isValidData =
+    isValidCode &&
+    isValidPassword &&
+    isValidConfirmPassword &&
+    isPasswordsMatch;
+  return isValidData;
 };
 
 export const refreshItem = (itemId) => {

@@ -5,7 +5,7 @@ const UserModule = {
     login: "",
     userPic: "",
     region: "",
-    myOffers: constants.items,
+    myOffers: constants.myOffers,
   },
   mutations: {
     setUserData(state, data) {

@@ -8,7 +8,7 @@
 <style lang="css" scoped>
 .profileContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
 }
 </style>
 

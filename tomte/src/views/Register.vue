@@ -6,11 +6,18 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Inloggningsformulär</v-toolbar-title>
+                <v-toolbar-title>Registreringsformulär</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
                 <v-form>
+                  <v-text-field
+                    label="E-mail"
+                    name="email"
+                    prepend-icon="mail"
+                    type="text"
+                    v-model="email"
+                  />
                   <v-text-field
                     label="Inloggning"
                     name="login"
@@ -18,7 +25,13 @@
                     type="text"
                     v-model="login"
                   />
-
+                  <v-text-field
+                    label="Regionen"
+                    name="login"
+                    prepend-icon="map"
+                    type="text"
+                    v-model="region"
+                  />
                   <v-text-field
                     id="password"
                     label="Lösenord"
@@ -26,15 +39,20 @@
                     prepend-icon="lock"
                     type="password"
                     v-model="password"
-                    v-on:keyup.enter="onDataEnter"
+                  />
+                  <v-text-field
+                    id="confirm-password"
+                    label="Lösenord återuppspelning"
+                    name="password"
+                    prepend-icon="lock"
+                    type="password"
+                    v-model="confirmPassword"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn v-on:click="goToRegister" color="primary">Registrera</v-btn>
-                <v-btn v-on:click="goToForgetPassword" color="primary">Påminn lösenord</v-btn>
                 <v-spacer />
-                <v-btn v-on:click="onDataEnter" color="primary">Logga in</v-btn>
+                <v-btn v-on:click="onDataEnter" color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -46,34 +64,34 @@
 
 <script>
 import navigationActions from "../router/navigationActions";
-import { login } from "../data/mockupRequests";
+import { register } from "../data/mockupRequests";
 export default {
   props: {},
   data: () => ({
-    login: "hshs@sksk.bi",
-    password: "12121212121212"
+    email: "",
+    login: "",
+    region: "",
+    password: "",
+    confirmPassword: ""
   }),
   computed: {
-    loginData: function() {
+    registerData: function() {
       return {
+        email: this.email,
         login: this.login,
-        password: this.password
+        region: this.region,
+        password: this.password,
+        confirmPassword: this.confirmPassword
       };
     }
   },
   methods: {
     onDataEnter: function() {
-      const isLogged = login(this.loginData);
+      const isLogged = register(this.registerData);
       if (isLogged) navigationActions.navigateToHome();
       else {
         alert("Fel användarnamn eller lösenord");
       }
-    },
-    goToRegister: function() {
-      navigationActions.navigateToRegister();
-    },
-    goToForgetPassword: function() {
-      navigationActions.navigateToForgetPassword();
     }
   }
 };

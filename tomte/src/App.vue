@@ -51,7 +51,7 @@
 import SearchBar from "./components/searchBar";
 import { mapState } from "vuex";
 import navigationActions from "./router/navigationActions";
-import { ROUTE_ALIAS } from "./router/RoutesAlias";
+import { isInsideTheApp } from "./router/RoutesAlias";
 
 export default {
   name: "App",
@@ -66,7 +66,7 @@ export default {
   computed: {
     ...mapState(["pageHeaderText", "isSearchBar"]),
     isInsideApp: function() {
-      return this.$route.path !== ROUTE_ALIAS.LOGIN;
+      return isInsideTheApp(this.$route.path);
     }
   },
   methods: {

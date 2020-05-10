@@ -3,6 +3,20 @@ export const emailValidation = (str) => {
   return re.test(String(str).toLowerCase());
 };
 
-export const passwordValidation = (passStr) => {
-  return passStr.length > 6;
+export const loginValidation = (str) => {
+  const isString = typeof str === "string";
+  const isValidLength = str.length > 3;
+  return isString && isValidLength;
+};
+
+export const passwordValidation = (password) => {
+  const isString = typeof password === "string";
+  const isValidLength = password.length > 6;
+  return isString && isValidLength;
+};
+
+export const codeValidation = (str) => {
+  const isString = typeof str === "string";
+  const isValidLength = str.length > 10;
+  return isString && isValidLength;
 };
