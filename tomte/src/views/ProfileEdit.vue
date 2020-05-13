@@ -1,21 +1,20 @@
 <template>
   <v-container class="profileContainer mx-auto">
-    <ProfileInputs :userState="this.userState"></ProfileInputs>
-    <SideItemList v-if="this.isMyOffersNotEmpty" :cards="this.myOffers"></SideItemList>
+    <ProfileInputs :userState="this.userState" :updateProfile="updateProfile"></ProfileInputs>
   </v-container>
 </template>
 
 <style lang="css" scoped>
 .profileContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 </style>
 
 <script>
 import { mapState } from "vuex";
 import ProfileInputs from "../components/ProfileInputs";
-import SideItemList from "../components/sideItemList";
+import { updateProfile } from "../data/mockupRequests";
 
 export default {
   name: "Profile",
@@ -23,23 +22,20 @@ export default {
     ...mapState(["UserModule"]),
     userState: function() {
       return this.UserModule;
-    },
-    myOffers: function() {
-      return this.userState.myOffers;
-    },
-    isMyOffersNotEmpty: function() {
-      return this.myOffers.length > 0;
     }
   },
   data: function() {
     return {};
   },
   components: {
-    ProfileInputs,
-    SideItemList
+    ProfileInputs
   },
   mounted: function() {},
-  methods: {},
+  methods: {
+    updateProfile: function() {
+      updateProfile();
+    }
+  },
   watch: {}
 };
 </script>

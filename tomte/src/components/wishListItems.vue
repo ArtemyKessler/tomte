@@ -3,9 +3,9 @@
     <v-row dense>
       <v-col v-for="card in this.wishListFilters" :key="card.id" :cols="3">
         <v-card
-          v-on:click="onFilterCardClick(card)"
+          v-on:click="pickFilterToChange(card)"
           class="lighten-4"
-          v-bind:class="{blue : card.id === pickedFilter }"
+          v-bind:class="{blue : card.id === pickedId }"
         >
           <v-card-subtitle class="pb-0">Kategori: {{ card.category }}</v-card-subtitle>
           <v-card-text class="text--primary">
@@ -67,7 +67,8 @@ import { mapState } from "vuex";
 export default {
   name: "itemList",
   props: {
-    pickFilterToChange: Function
+    pickFilterToChange: Function,
+    pickedId: String
   },
   data: () => ({
     pickedFilter: undefined
@@ -75,16 +76,6 @@ export default {
   computed: {
     ...mapState(["wishListFilters"])
   },
-  methods: {
-    onFilterCardClick: function(card) {
-      if (this.pickedFilter === card.id) {
-        this.pickedFilter = undefined;
-        this.pickFilterToChange({});
-      } else {
-        this.pickedFilter = card.id;
-        this.pickFilterToChange(card);
-      }
-    }
-  }
+  methods: {}
 };
 </script>

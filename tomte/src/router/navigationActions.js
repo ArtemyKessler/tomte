@@ -31,6 +31,9 @@ const navigationActions = {
   navigateToProfile: function(params) {
     router.push({ path: "/profile", params });
   },
+  navigateToMyItems: function(params) {
+    router.push({ path: "/myItems", params });
+  },
 };
 
 export default navigationActions;

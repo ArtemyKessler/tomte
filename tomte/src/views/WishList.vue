@@ -6,7 +6,11 @@
       isStringSearch
       class="filters"
     />
-    <WishListItems :pickFilterToChange="this.pickFilterToChange" class="wishList" />
+    <WishListItems
+      :pickFilterToChange="this.pickFilterToChange"
+      :pickedId="this.filtersToEdit.id"
+      class="wishList"
+    />
   </div>
 </template> 
 
@@ -45,7 +49,11 @@ export default {
   }),
   methods: {
     pickFilterToChange: function(data) {
-      this.filtersToEdit = data;
+      if (this.filtersToEdit.id === data.id) {
+        this.filtersToEdit = {};
+      } else {
+        this.filtersToEdit = data;
+      }
     },
     updateFilter: function(data) {
       if (data.id) {

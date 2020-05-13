@@ -11,12 +11,13 @@
         prepend-icon="mdi-camera"
         label="Avatar"
       ></v-file-input>
-      <v-text-field class="mx-4" v-model="this.userState.login" label="Inloggning" clearable></v-text-field>
+      <v-text-field class="mx-4" v-model="this.login" label="Inloggning" clearable></v-text-field>
+      <v-text-field class="mx-4" v-model="this.region" label="Område" clearable></v-text-field>
       <v-text-field class="mx-4" label="Lösenord" clearable></v-text-field>
       <v-text-field class="mx-4" label="Lösenord återuppspelning" clearable></v-text-field>
     </div>
     <v-card-actions>
-      <v-btn v-on:click="updateProfile" color="orange" text>Uppdatera Profilen</v-btn>
+      <v-btn @click="this.onUdateProfileClick" color="orange" text>Uppdatera Profilen</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -35,7 +36,8 @@
 export default {
   name: "ProfileInputs",
   props: {
-    userState: Object
+    userState: Object,
+    updateProfile: Function
   },
   data: function() {
     return {
@@ -47,13 +49,21 @@ export default {
       ],
       file: undefined,
       login: this.userState.login,
+      region: this.userState.region,
       password: "",
       confirmConfirm: ""
     };
   },
+  computed: {
+    userData: function() {
+      return {
+        login: this.login
+      };
+    }
+  },
   methods: {
-    updateProfile: function() {
-      console.log("STATE");
+    onUdateProfileClick: function() {
+      this.updateProfile();
     }
   },
   mounted: function() {

@@ -1,7 +1,12 @@
 <template>
   <v-container class="list-container mx-1 my-2">
-    <div v-for="card in this.cards" :key="card.id">
-      <v-card class="lastSeenCard" v-on:click="onCardClick(card)">
+    <p class="font-weight-bold">{{this.headerText}}</p>
+    <div v-for="(card, index) in this.cards" :key="card.id">
+      <v-card
+        class="lastSeenCard"
+        v-on:click="onCardClick(card)"
+        v-bind:class="{noBottomMargin: index===cardsLength}"
+      >
         <v-img
           :src="card.src"
           class="white--text"
@@ -38,6 +43,10 @@
   margin-bottom: 10px;
 }
 
+.noBottomMargin {
+  margin-bottom: 0px;
+}
+
 .card-footer {
   height: 4vh;
 }
@@ -61,18 +70,20 @@
 </style>
 
 <script>
-import navigationActions from "../router/navigationActions";
 export default {
   name: "SideItemList",
   data: () => ({}),
   props: {
-    cards: Array
+    cards: Array,
+    headerText: String,
+    onCardClick: Function
+  },
+  computed: {
+    cardsLength: function() {
+      return this.cards.length - 1 || 0;
+    }
   },
   methods: {
-    onCardClick: function(card) {
-      if (this.$route.params.id !== card.id)
-        navigationActions.navigateToAbout(card.id);
-    },
     copyLink: function(card) {
       navigator.clipboard
         .writeText(card.id)

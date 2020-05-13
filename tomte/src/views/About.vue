@@ -3,7 +3,13 @@
     <div class="d-flex my-2">
       <AboutCard :toggleChat="this.toggleChat" :isChatOpened="this.isChatOpened"></AboutCard>
       <Chat v-if="this.isChatOpened"></Chat>
-      <SideItemList max-width="100" :cards="this.lastSeenCards" v-if="this.isLastSeenNotEmpty"></SideItemList>
+      <SideItemList
+        :headerText="this.headerText"
+        :onCardClick="this.navigateToCard"
+        :cards="this.lastSeenCards"
+        v-if="this.isLastSeenNotEmpty"
+        max-width="100"
+      ></SideItemList>
       <div></div>
     </div>
   </div>
@@ -25,6 +31,7 @@ import { refreshItem } from "../data/mockupRequests";
 import Chat from "../components/chat";
 import SideItemList from "../components/sideItemList";
 import AboutCard from "../components/AboutCard";
+import navigationActions from "../router/navigationActions";
 
 export default {
   name: "About",
@@ -36,7 +43,8 @@ export default {
   },
   data: function() {
     return {
-      isChatOpened: false
+      isChatOpened: false,
+      headerText: "Senast sedd"
     };
   },
   components: {
@@ -52,6 +60,10 @@ export default {
     this.setLastSeenCards();
   },
   methods: {
+    navigateToCard: function(card) {
+      if (this.$route.params.id !== card.id)
+        navigationActions.navigateToAbout(card.id);
+    },
     toggleChat: function() {
       this.isChatOpened = !this.isChatOpened;
     },

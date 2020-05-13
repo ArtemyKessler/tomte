@@ -23,6 +23,10 @@ const headerTextAliases = {
     text: "Redigera Profil",
     isSearchBar: false,
   },
+  MyItems: {
+    text: "Mina erbjudanden",
+    isSearchBar: false,
+  },
 };
 
 const routes = [
@@ -66,6 +70,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: () => import("../views/ProfileEdit.vue"),
+  },
+  {
+    path: "/myItems",
+    name: "MyItems",
+    component: () => import("../views/MyItems.vue"),
   },
 ];
 

@@ -58,6 +58,10 @@ export const changePassword = (data) => {
   return isValidData;
 };
 
+export const updateProfile = (userData) => {
+  store.commit("setUserData", userData);
+};
+
 export const refreshItem = (itemId) => {
   const item = store.state.cards.find((item) => item.id === itemId);
   store.commit("setLastOpenedCard", item);
@@ -70,6 +74,15 @@ export const updateFilterInWishList = (data) => {
 export const addFilterToWishList = (data) => {
   data.id = uuidv1();
   store.commit("addFilterToWishList", data);
+};
+
+export const updateOfferInMyItems = (data) => {
+  store.commit("updateOfferInMyItems", data);
+};
+
+export const addOfferToMyItems = (data) => {
+  data.id = uuidv1();
+  store.commit("addOfferToMyItems", data);
 };
 
 export const refreshFirstPageItems = () => {

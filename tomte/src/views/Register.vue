@@ -52,7 +52,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn v-on:click="onDataEnter" color="primary">Login</v-btn>
+                <v-btn v-on:click="onDataEnter" color="primary">Registera</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

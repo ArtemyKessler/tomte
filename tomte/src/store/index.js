@@ -17,6 +17,7 @@ const store = new Vuex.Store({
     lastSeenCards: [],
     wishListFilters: constants.wishListFilters,
     lastScrollPosition: 0,
+    myOffers: constants.myOffers,
   },
   mutations: {
     changePageHeaderText(state, info) {
@@ -49,6 +50,16 @@ const store = new Vuex.Store({
     },
     addFilterToWishList(state, data) {
       state.wishListFilters = [data, ...state.wishListFilters];
+    },
+    updateOfferInMyItems(state, data) {
+      const newOffers = [
+        data,
+        ...state.myOffers.filter((item) => item.id !== data.id),
+      ];
+      state.myOffers = newOffers;
+    },
+    addOfferToMyItems(state, data) {
+      state.myOffers = [data, ...state.myOffers];
     },
     addItems(state, data) {
       state.cards = [...state.cards, ...data];

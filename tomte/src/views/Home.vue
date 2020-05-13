@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <Filters :applyFilters="searchWithFilters" class="filters" />
-    <ItemList :onEndReached="loadMoreItemsToMainList" class="itemList" />
+    <ItemList
+      :cards="this.cards"
+      :onCardClick="this.onCardClick"
+      :onEndReached="loadMoreItemsToMainList"
+      class="itemList"
+    />
   </div>
 </template>
 
@@ -25,12 +30,17 @@
 <script>
 import Filters from "../components/filters";
 import ItemList from "../components/list";
+import navigationActions from "../router/navigationActions";
 import { loadMoreItems } from "../data/mockupRequests";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
     Filters,
     ItemList
+  },
+  computed: {
+    ...mapState(["cards"])
   },
   methods: {
     searchWithFilters: function(filters) {
@@ -39,6 +49,9 @@ export default {
     },
     loadMoreItemsToMainList: function() {
       loadMoreItems();
+    },
+    onCardClick: function(card) {
+      navigationActions.navigateToAbout(card.id);
     }
   }
 };

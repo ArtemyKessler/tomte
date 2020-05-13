@@ -2,7 +2,7 @@
   <v-container v-on:scroll="onScroll" ref="listContainer" class="list-container" fluid>
     <v-row dense>
       <v-col v-for="card in this.cards" :key="card.id" :cols="3">
-        <v-card v-on:click="onCardClick(card)">
+        <v-card v-on:click="onCardClick(card)" v-bind:class="{blue: card.id === pickedId}">
           <v-img
             :src="card.src"
             class="white--text align-end"
@@ -60,22 +60,21 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import navigationActions from "../router/navigationActions";
 export default {
   name: "itemList",
   props: {
-    onEndReached: Function
+    onEndReached: Function,
+    cards: Array,
+    onCardClick: Function,
+    pickedId: String
   },
   data: () => ({
     lastScroll: 0
   }),
   computed: {
-    ...mapState(["cards", "lastScrollPosition"])
+    ...mapState(["lastScrollPosition"])
   },
   methods: {
-    onCardClick: function(card) {
-      navigationActions.navigateToAbout(card.id);
-    },
     onScroll({ target: { scrollTop, clientHeight, scrollHeight } }) {
       this.lastScroll = scrollTop;
       if (scrollTop + clientHeight >= scrollHeight) {
