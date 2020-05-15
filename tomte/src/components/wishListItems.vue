@@ -1,30 +1,14 @@
 <template>
   <v-container class="list-container" fluid>
-    <v-row dense>
-      <v-col v-for="card in this.wishListFilters" :key="card.id" :cols="3">
-        <v-card
-          v-on:click="pickFilterToChange(card)"
-          class="lighten-4"
-          v-bind:class="{blue : card.id === pickedId }"
-        >
-          <v-card-subtitle class="pb-0">Kategori: {{ card.category }}</v-card-subtitle>
-          <v-card-text class="text--primary">
-            <div>Staden: {{ card.region }}</div>
-          </v-card-text>
-          <v-chip-group column class="chipGroup">
-            <v-chip v-for="tag in card.tags" :key="tag">
-              {{
-              tag
-              }}
-            </v-chip>
-          </v-chip-group>
-          <v-card-actions>
-            <v-card-title v-text="card.title"></v-card-title>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
+    <v-layout class="mt-2" row wrap :justify-space-between="true">
+      <WishListCard
+        v-for="card in this.wishListFilters"
+        :card="card"
+        :key="card.id"
+        :onCardClick="pickFilterToChange"
+        :isPicked="card.id === pickedId"
+      ></WishListCard>
+    </v-layout>
   </v-container>
 </template>
 
@@ -63,7 +47,7 @@
 
 <script>
 import { mapState } from "vuex";
-// import navigationActions from "../router/navigationActions";
+import WishListCard from "./WishListCard";
 export default {
   name: "itemList",
   props: {
@@ -75,6 +59,9 @@ export default {
   }),
   computed: {
     ...mapState(["wishListFilters"])
+  },
+  components: {
+    WishListCard
   },
   methods: {}
 };

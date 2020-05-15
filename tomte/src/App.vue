@@ -48,7 +48,7 @@
         </v-navigation-drawer>
 
         <v-app-bar v-if="this.isInsideApp" app color="primary" dark>
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
           <div class="d-flex align-center">
             <v-toolbar-title>Tomte</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
@@ -87,7 +87,7 @@
 
 <script>
 import SearchBar from "./components/searchBar";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import navigationActions from "./router/navigationActions";
 import { isInsideTheApp } from "./router/RoutesAlias";
 
@@ -113,6 +113,11 @@ export default {
     this.drawer = false;
   },
   methods: {
+    ...mapMutations(["setIsDrawerOpened"]),
+    toggleDrawer: function() {
+      this.drawer = !this.drawer;
+      this.setIsDrawerOpened(this.drawer);
+    },
     navigateToHome: function() {
       navigationActions.navigateToHome();
     },

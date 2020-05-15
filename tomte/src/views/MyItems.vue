@@ -1,36 +1,27 @@
 <template>
-  <div class="home">
+  <div class="myItems">
     <Filters
+      v-if="!this.isDrawerOpen"
       :filters="this.filtersToEdit"
       :applyFilters="saveChangeToItem"
       isStringSearch
-      class="filters"
     />
     <ItemList
       v-if="this.isMyOffersNotEmpty"
       :cards="this.myOffers"
       :onCardClick="this.pickCard"
-      :onEndReached="loadMoreItemsToMainList"
+      :onEndReached="loadMoreItemsToMyItemsList"
       :pickedId="this.filtersToEdit.id"
-      class="itemList"
     />
   </div>
 </template>
 
 <style scoped>
-.home {
+.myItems {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-areas: "filters list";
-  grid-template-columns: 1fr 3fr;
-  grid-column-gap: 10px;
-}
-.filters {
-  grid-area: filters;
-}
-.itemList {
-  grid-area: list;
+  display: flex;
+  justify-content: space-around;
 }
 </style>
 
@@ -52,7 +43,7 @@ export default {
     filtersToEdit: {}
   }),
   computed: {
-    ...mapState(["myOffers"]),
+    ...mapState(["myOffers", "isDrawerOpen"]),
     isMyOffersNotEmpty: function() {
       return this.myOffers.length > 0;
     }
@@ -67,7 +58,7 @@ export default {
         addOfferToMyItems(data);
       }
     },
-    loadMoreItemsToMainList: function() {
+    loadMoreItemsToMyItemsList: function() {
       //   loadMoreItems();
     },
     pickCard: function(data) {

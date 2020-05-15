@@ -11,11 +11,7 @@
       <v-chip v-for="tag in this.lastOpenedCard.tags" :key="tag">{{ tag }}</v-chip>
     </v-chip-group>
     <v-card-actions>
-      <v-btn
-        v-on:click="this.toggleChat"
-        color="orange"
-        text
-      >{{ this.isChatOpened ? "Sluta Chatta" : "Börja Chatta" }}</v-btn>
+      <v-btn v-on:click="this.navigateToChat" color="orange" text>Börja Chatta</v-btn>
       <v-btn v-on:click="copyToClipboard" color="orange" text>Dela Länk</v-btn>
     </v-card-actions>
   </v-card>
@@ -23,6 +19,7 @@
 
 <style lang="scss" scoped>
 .aboutCard {
+  height: 85vh;
   width: 35vw;
 }
 .chipGroup {
@@ -40,8 +37,7 @@ import { mapState } from "vuex";
 export default {
   name: "AboutCard",
   props: {
-    toggleChat: Function,
-    isChatOpened: Boolean
+    navigateToChat: Function
   },
   computed: {
     ...mapState(["lastOpenedCard"])

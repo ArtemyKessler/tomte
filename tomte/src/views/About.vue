@@ -1,8 +1,7 @@
 <template>
   <div class="about">
     <div class="d-flex my-2">
-      <AboutCard :toggleChat="this.toggleChat" :isChatOpened="this.isChatOpened"></AboutCard>
-      <Chat v-if="this.isChatOpened"></Chat>
+      <AboutCard :navigateToChat="this.navigateToChat"></AboutCard>
       <SideItemList
         :headerText="this.headerText"
         :onCardClick="this.navigateToCard"
@@ -16,6 +15,12 @@
 </template>
 
 <style lang="css" scoped>
+.about {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .chipGroup {
   margin-left: 1vw;
 }
@@ -28,7 +33,6 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import { refreshItem } from "../data/mockupRequests";
-import Chat from "../components/chat";
 import SideItemList from "../components/sideItemList";
 import AboutCard from "../components/AboutCard";
 import navigationActions from "../router/navigationActions";
@@ -43,12 +47,10 @@ export default {
   },
   data: function() {
     return {
-      isChatOpened: false,
       headerText: "Senast sedd"
     };
   },
   components: {
-    Chat,
     SideItemList,
     AboutCard
   },
@@ -64,8 +66,8 @@ export default {
       if (this.$route.params.id !== card.id)
         navigationActions.navigateToAbout(card.id);
     },
-    toggleChat: function() {
-      this.isChatOpened = !this.isChatOpened;
+    navigateToChat: function() {
+      console.log("TO CHAT!!!");
     },
     copyToClipboard: function() {
       navigator.clipboard

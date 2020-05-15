@@ -110,6 +110,34 @@ const wishListFilters = [
     region: "Visby",
     id: "222",
   },
+  {
+    title: "HP",
+    category: "Tech",
+    tags: ["used", "branded", "good condition"],
+    region: "Lund",
+    id: "333",
+  },
+  {
+    title: "Gucci",
+    category: "Kläder",
+    tags: ["used", "branded", "good condition"],
+    region: "Malmö",
+    id: "444",
+  },
+  {
+    title: "Apple",
+    category: "Tech",
+    tags: ["used", "branded", "medium condition"],
+    region: "Visby",
+    id: "555",
+  },
+  {
+    title: "HP",
+    category: "Tech",
+    tags: ["used", "branded", "good condition"],
+    region: "Lund",
+    id: "666",
+  },
 ];
 
 const myOffers = [

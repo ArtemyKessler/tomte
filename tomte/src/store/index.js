@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     UserModule,
   },
   state: {
+    isDrawerOpen: false,
     isSearchBar: true,
     pageHeaderText: "Sök",
     lastOpenedCard: {},
@@ -20,6 +21,9 @@ const store = new Vuex.Store({
     myOffers: constants.myOffers,
   },
   mutations: {
+    setIsDrawerOpened(state, isOpened) {
+      state.isDrawerOpen = isOpened;
+    },
     changePageHeaderText(state, info) {
       state.pageHeaderText = info.text;
       state.isSearchBar = info.isSearchBar;

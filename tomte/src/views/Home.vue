@@ -1,11 +1,10 @@
 <template>
   <div class="home">
-    <Filters :applyFilters="searchWithFilters" class="filters" />
+    <Filters v-if="!this.isDrawerOpen" :applyFilters="searchWithFilters" />
     <ItemList
       :cards="this.cards"
       :onCardClick="this.onCardClick"
       :onEndReached="loadMoreItemsToMainList"
-      class="itemList"
     />
   </div>
 </template>
@@ -14,16 +13,8 @@
 .home {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-areas: "filters list";
-  grid-template-columns: 1fr 3fr;
-  grid-column-gap: 10px;
-}
-.filters {
-  grid-area: filters;
-}
-.itemList {
-  grid-area: list;
+  display: flex;
+  justify-content: space-around;
 }
 </style>
 
@@ -40,7 +31,7 @@ export default {
     ItemList
   },
   computed: {
-    ...mapState(["cards"])
+    ...mapState(["cards", "isDrawerOpen"])
   },
   methods: {
     searchWithFilters: function(filters) {

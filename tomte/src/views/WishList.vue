@@ -1,16 +1,12 @@
 <template>
   <div class="wishlist-container">
     <Filters
+      v-if="!this.isDrawerOpen"
       :filters="this.filtersToEdit"
       :applyFilters="this.updateFilter"
       isStringSearch
-      class="filters"
     />
-    <WishListItems
-      :pickFilterToChange="this.pickFilterToChange"
-      :pickedId="this.filtersToEdit.id"
-      class="wishList"
-    />
+    <WishListItems :pickFilterToChange="this.pickFilterToChange" :pickedId="this.filtersToEdit.id" />
   </div>
 </template> 
 
@@ -18,22 +14,15 @@
 .wishlist-container {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-areas: "filters list";
-  grid-template-columns: 1fr 3fr;
-  grid-column-gap: 10px;
-}
-.filters {
-  grid-area: filters;
-}
-.wishList {
-  grid-area: list;
+  display: flex;
+  justify-content: space-around;
 }
 </style>
 
 <script>
+import { mapState } from "vuex";
 import Filters from "../components/filters";
-import WishListItems from "../components/wishListItems";
+import WishListItems from "../components/WishListItems";
 import {
   updateFilterInWishList,
   addFilterToWishList
@@ -47,6 +36,9 @@ export default {
   data: () => ({
     filtersToEdit: {}
   }),
+  computed: {
+    ...mapState(["isDrawerOpen"])
+  },
   methods: {
     pickFilterToChange: function(data) {
       if (this.filtersToEdit.id === data.id) {
