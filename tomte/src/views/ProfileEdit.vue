@@ -1,6 +1,6 @@
 <template>
   <v-container class="profileContainer mx-auto">
-    <ProfileInputs :userState="this.userState" :updateProfile="updateProfile"></ProfileInputs>
+    <ProfileInputs :userState="this.user" :updateProfile="updateProfile"></ProfileInputs>
   </v-container>
 </template>
 
@@ -12,17 +12,14 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import ProfileInputs from "../components/ProfileInputs";
 import { updateProfile } from "../data/mockupRequests";
 
 export default {
   name: "Profile",
   computed: {
-    ...mapState(["UserModule"]),
-    userState: function() {
-      return this.UserModule;
-    }
+    ...mapGetters(["user"])
   },
   data: function() {
     return {};

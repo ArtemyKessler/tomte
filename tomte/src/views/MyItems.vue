@@ -1,5 +1,5 @@
 <template>
-  <div class="myItems">
+  <div class="myItems" :class="{smallScreenPosition: this.$vuetify.breakpoint.smAndDown}">
     <Filters
       v-if="!this.isDrawerOpen"
       :filters="this.filtersToEdit"
@@ -22,6 +22,10 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+.smallScreenPosition {
+  flex-direction: column;
 }
 </style>
 

@@ -30,11 +30,13 @@
                   />
                 </v-form>
               </v-card-text>
-              <v-card-actions>
-                <v-btn v-on:click="goToRegister" color="primary">Registrera</v-btn>
-                <v-btn v-on:click="goToForgetPassword" color="primary">Påminn lösenord</v-btn>
+              <v-card-actions class="actions">
+                <v-btn v-on:click="onDataEnter" color="primary" class="loginBtn">Logga in</v-btn>
+                <div class="d-flex btnGroup">
+                  <v-btn v-on:click="goToRegister" color="primary">Registrera</v-btn>
+                  <v-btn v-on:click="goToForgetPassword" color="primary">Påminn pass</v-btn>
+                </div>
                 <v-spacer />
-                <v-btn v-on:click="onDataEnter" color="primary">Logga in</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -43,6 +45,23 @@
     </v-content>
   </v-app>
 </template>
+
+<style scoped>
+.actions {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.loginBtn {
+  align-self: flex-end;
+}
+
+.btnGroup {
+  margin-top: 0.5em;
+  width: 100%;
+  justify-content: space-between;
+}
+</style>
 
 <script>
 import navigationActions from "../router/navigationActions";

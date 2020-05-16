@@ -34,6 +34,12 @@ const navigationActions = {
   navigateToMyItems: function(params) {
     router.push({ path: "/myItems", params });
   },
+  navigateToChatList: function(params) {
+    router.push({ path: "/chats", params });
+  },
+  navigateToChat: function(id, params) {
+    router.push({ path: `/chat/${id}`, params });
+  },
 };
 
 export default navigationActions;

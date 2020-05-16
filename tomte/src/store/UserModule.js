@@ -1,17 +1,17 @@
 const UserModule = {
   state: {
-    login: "",
-    userPic: "",
-    region: "",
+    user: null,
   },
   mutations: {
     setUserData(state, data) {
-      state.login = data.login;
-      state.userPic = data.userPic;
-      state.region = data.region;
+      state.user = data;
     },
   },
-  getters: {},
+  getters: {
+    user(state) {
+      return state.user;
+    },
+  },
 };
 
 export default UserModule;

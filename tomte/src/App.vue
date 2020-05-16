@@ -2,59 +2,40 @@
   <div id="app">
     <v-app id="inspire">
       <v-app id="inspire">
-        <v-navigation-drawer v-model="drawer" app>
+        <v-navigation-drawer disable-resize-watcher v-model="drawer" app>
           <v-list dense>
-            <v-list-item link @click="navigateToHome">
+            <v-list-item
+              v-for="item in this.drawerMenuItems"
+              :key="item.text"
+              link
+              @click="item.onClick"
+            >
               <v-list-item-action>
-                <v-icon>search</v-icon>
+                <v-icon>{{item.icon}}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Sök</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item link @click="navigateToWishList">
-              <v-list-item-action>
-                <v-icon>list</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>Önskelista</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item link @click="navigateToProfile">
-              <v-list-item-action>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>Profil</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item link @click="navigateToMyList">
-              <v-list-item-action>
-                <v-icon>mdi-briefcase</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>Mina erbjudanden</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item link @click="navigateToLogin">
-              <v-list-item-action>
-                <v-icon>mdi-exit-run</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>Utgång</v-list-item-title>
+                <v-list-item-title>{{item.text}}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar v-if="this.isInsideApp" app color="primary" dark>
+        <v-app-bar v-if="this.isInsideApp" app color="primary" dark class="d-flex align-center">
           <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
           <div class="d-flex align-center">
             <v-toolbar-title>Tomte</v-toolbar-title>
             <v-divider class="mx-4" vertical></v-divider>
             <span class="subheading limited">{{ this.pageHeaderText }}</span>
           </div>
-          <SearchBar v-if="this.isSearchBar" v-model="searchValue" msg="sasat" class="search" />
+          <v-text-field
+            v-if="this.isSearchBar"
+            class="search mx-auto align-center"
+            v-model="searchValue"
+            hide-details
+            clearable
+            dense
+            filled
+          ></v-text-field>
         </v-app-bar>
 
         <v-content>
@@ -77,7 +58,7 @@
 }
 
 .search {
-  align-self: flex-start;
+  width: 50vw;
 }
 
 .limited {
@@ -86,7 +67,6 @@
 </style>
 
 <script>
-import SearchBar from "./components/searchBar";
 import { mapState, mapMutations } from "vuex";
 import navigationActions from "./router/navigationActions";
 import { isInsideTheApp } from "./router/RoutesAlias";
@@ -94,26 +74,65 @@ import { isInsideTheApp } from "./router/RoutesAlias";
 export default {
   name: "App",
 
-  components: {
-    SearchBar
-  },
+  components: {},
 
-  data: () => ({
-    searchValue: "",
-    drawer: null
-  }),
+  data: function() {
+    return {
+      drawer: null,
+      drawerMenuItems: [
+        {
+          onClick: this.navigateToHome,
+          icon: "search",
+          text: "Sök"
+        },
+        {
+          onClick: this.navigateToWishList,
+          icon: "list",
+          text: "Önskelista"
+        },
+        {
+          onClick: this.navigateToProfile,
+          icon: "mdi-account",
+          text: "Profil"
+        },
+        {
+          onClick: this.navigateToMyList,
+          icon: "mdi-briefcase",
+          text: "Mina erbjudanden"
+        },
+        {
+          onClick: this.navigateToChatList,
+          icon: "mdi-forum-outline",
+          text: "Сhattar"
+        },
+        {
+          onClick: this.navigateToLogin,
+          icon: "mdi-exit-run",
+          text: "Utgång"
+        }
+      ]
+    };
+  },
   computed: {
-    ...mapState(["pageHeaderText", "isSearchBar"]),
+    ...mapState(["pageHeaderText", "isSearchBar", "globalSearchString"]),
     isInsideApp: function() {
       const isInside = isInsideTheApp(this.$route.path);
       return isInside;
+    },
+    searchValue: {
+      get() {
+        return this.globalSearchString;
+      },
+      set(value) {
+        this.setGlobalSearchString(value);
+      }
     }
   },
   created: function() {
     this.drawer = false;
   },
   methods: {
-    ...mapMutations(["setIsDrawerOpened"]),
+    ...mapMutations(["setIsDrawerOpened", "setGlobalSearchString"]),
     toggleDrawer: function() {
       this.drawer = !this.drawer;
       this.setIsDrawerOpened(this.drawer);
@@ -130,9 +149,18 @@ export default {
     navigateToMyList: function() {
       navigationActions.navigateToMyItems();
     },
+    navigateToChatList: function() {
+      navigationActions.navigateToChatList();
+    },
     navigateToLogin: function() {
       this.drawer = false;
+      this.setIsDrawerOpened(this.drawer);
       navigationActions.navigateToLogin();
+    }
+  },
+  watch: {
+    drawer: function(newVal) {
+      this.setIsDrawerOpened(newVal);
     }
   }
 };

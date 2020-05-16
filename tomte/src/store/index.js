@@ -12,6 +12,7 @@ const store = new Vuex.Store({
   state: {
     isDrawerOpen: false,
     isSearchBar: true,
+    globalSearchString: "ASAS",
     pageHeaderText: "Sök",
     lastOpenedCard: {},
     cards: constants.items,
@@ -27,6 +28,9 @@ const store = new Vuex.Store({
     changePageHeaderText(state, info) {
       state.pageHeaderText = info.text;
       state.isSearchBar = info.isSearchBar;
+    },
+    setGlobalSearchString(state, string) {
+      state.globalSearchString = string;
     },
     setLastOpenedCard(state, card) {
       state.lastOpenedCard = card;

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :class="{smallScreenPosition: this.$vuetify.breakpoint.smAndDown}">
     <Filters v-if="!this.isDrawerOpen" :applyFilters="searchWithFilters" />
     <ItemList
       :cards="this.cards"
@@ -15,6 +15,10 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+.smallScreenPosition {
+  flex-direction: column;
 }
 </style>
 

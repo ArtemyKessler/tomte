@@ -1,5 +1,8 @@
 <template>
-  <div class="wishlist-container">
+  <div
+    class="wishlist-container"
+    :class="{smallScreenPosition: this.$vuetify.breakpoint.smAndDown}"
+  >
     <Filters
       v-if="!this.isDrawerOpen"
       :filters="this.filtersToEdit"
@@ -16,6 +19,10 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+.smallScreenPosition {
+  flex-direction: column;
 }
 </style>
 
