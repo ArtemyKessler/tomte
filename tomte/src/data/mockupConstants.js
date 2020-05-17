@@ -177,4 +177,25 @@ const myOffers = [
   },
 ];
 
-export default { items, wishListFilters, userInfo, myOffers };
+const myChats = [
+  {
+    name: "Clary",
+    subject: "iMac",
+    id: "12121212",
+    isUnreadMessages: false,
+  },
+  {
+    name: "Dennis",
+    subject: "Gucci",
+    id: "23232323",
+    isUnreadMessages: true,
+  },
+  {
+    name: "Arina",
+    subject: "T-shirt",
+    id: "343434344",
+    isUnreadMessages: false,
+  },
+];
+
+export default { items, wishListFilters, userInfo, myOffers, myChats };

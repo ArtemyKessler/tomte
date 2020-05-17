@@ -1,7 +1,12 @@
 <template>
   <v-list subheader>
     <v-subheader>Your Chats</v-subheader>
-    <v-list-item avatar v-for="(chat, index) in chats" v-bind:key="chat.name" :to="/chat/ + index">
+    <v-list-item
+      avatar
+      v-for="(chat) in chatList"
+      v-bind:key="chat.id"
+      @click="onChatClick(chat.id)"
+    >
       <v-list-item-content>
         <v-list-item-title v-html="chat.name"></v-list-item-title>
       </v-list-item-content>
@@ -13,14 +18,20 @@
 </template>
 
 <script>
-  export default{
-    created () {
-      this.$store.dispatch('loadUserChats')
-    },
-    computed: {
-      chats () {
-        return this.$store.getters.chats
-      }
+import { loadUserChats } from "../../../data/mockupRequests";
+import { mapGetters } from "vuex";
+import navigationActions from "../../../router/navigationActions";
+export default {
+  created() {
+    loadUserChats();
+  },
+  computed: {
+    ...mapGetters(["chatList"])
+  },
+  methods: {
+    onChatClick: function(id) {
+      navigationActions.navigateToChat(id);
     }
   }
+};
 </script>

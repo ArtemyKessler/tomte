@@ -2,12 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 import constants from "../data/mockupConstants";
 import UserModule from "./UserModule";
+import ChatModule from "./ChatModule";
+import ChatListModule from "./ChatListModule";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
     UserModule,
+    ChatModule,
+    ChatListModule,
   },
   state: {
     isDrawerOpen: false,

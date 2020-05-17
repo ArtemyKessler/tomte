@@ -1,7 +1,8 @@
 <template>
   <v-container v-on:scroll="onScroll" ref="chatlistContainer">
     <v-row no-gutters>
-      <v-col v-for="(chat, index) in chats" :key="chat.name" cols="12" sm="4">
+      <v-col v-for="(chat, index) in chatList" :key="chat.name" cols="12" sm="4">
+        <v-badge bordered color="error" icon="mdi-lock" overlap></v-badge>
         <v-card class="mx-1 my-1" max-width="344" outlined>
           <v-list-item three-line>
             <v-list-item-content>
@@ -21,6 +22,8 @@
 
 <script>
 import navigationActions from "../router/navigationActions";
+import { loadUserChats } from "../data/mockupRequests";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -29,33 +32,11 @@ export default {
       loading: false
     };
   },
-  mounted() {
-    this.loadRecentChats();
-  },
   computed: {
-    user() {
-      return this.$store.getters.user;
-    },
-    chats() {
-      // return this.loadedChats;
-      return [
-        {
-          name: "Clary",
-          subject: "iMac",
-          id: "12121212"
-        },
-        {
-          name: "Dennis",
-          subject: "Gucci",
-          id: "23232323"
-        },
-        {
-          name: "Arina",
-          subject: "T-shirt",
-          id: "23232323"
-        }
-      ];
-    }
+    ...mapGetters(["user", "chatList"])
+    // user() {
+    //   return this.$store.getters.user;
+    // },
   },
   methods: {
     loadRecentChats(lastKey) {
@@ -138,6 +119,7 @@ export default {
     }
   },
   created() {
+    loadUserChats();
     window.addEventListener("scroll", this.onScroll);
   },
   destroyed() {
