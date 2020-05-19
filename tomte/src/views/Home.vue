@@ -26,7 +26,7 @@
 import Filters from "../components/filters";
 import ItemList from "../components/list";
 import navigationActions from "../router/navigationActions";
-import { loadMoreItems } from "../data/mockupRequests";
+import { loadMoreItems, loadItemCards} from "../data/mockupRequests";
 import { mapState } from "vuex";
 export default {
   name: "Home",
@@ -36,6 +36,9 @@ export default {
   },
   computed: {
     ...mapState(["cards", "isDrawerOpen"])
+  },
+  created: function() {
+    loadItemCards();
   },
   methods: {
     searchWithFilters: function(filters) {

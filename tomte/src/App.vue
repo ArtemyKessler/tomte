@@ -11,16 +11,22 @@
               @click="item.onClick"
             >
               <v-list-item-action>
-                <v-icon>{{item.icon}}</v-icon>
+                <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>{{item.text}}</v-list-item-title>
+                <v-list-item-title>{{ item.text }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar v-if="this.isInsideApp" app color="primary" dark class="d-flex align-center">
+        <v-app-bar
+          v-if="this.isInsideApp"
+          app
+          color="primary"
+          dark
+          class="d-flex align-center"
+        >
           <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
           <div class="d-flex align-center">
             <v-toolbar-title>Tomte</v-toolbar-title>
@@ -47,121 +53,125 @@
 </template>
 
 <style lang="scss" scoped>
-#nav {
-  a {
-    font-weight: bold;
-    color: whitesmoke;
-    &.router-link-exact-active {
-      color: #42b983;
+  #nav {
+    a {
+      font-weight: bold;
+      color: whitesmoke;
+      &.router-link-exact-active {
+        color: #42b983;
+      }
     }
   }
-}
 
-.search {
-  width: 50vw;
-}
+  .search {
+    width: 50vw;
+  }
 
-.limited {
-  width: 10em;
-}
+  .limited {
+    width: 10em;
+  }
 </style>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import navigationActions from "./router/navigationActions";
-import { isInsideTheApp } from "./router/RoutesAlias";
+  import Vue from "vue";
+  import { mapState, mapMutations } from "vuex";
+  import navigationActions from "./router/navigationActions";
+  import { isInsideTheApp } from "./router/RoutesAlias";
+  import vueResource from "vue-resource";
 
-export default {
-  name: "App",
+  Vue.use(vueResource);
 
-  components: {},
+  export default {
+    name: "App",
 
-  data: function() {
-    return {
-      drawer: null,
-      drawerMenuItems: [
-        {
-          onClick: this.navigateToHome,
-          icon: "search",
-          text: "Sök"
-        },
-        {
-          onClick: this.navigateToWishList,
-          icon: "list",
-          text: "Önskelista"
-        },
-        {
-          onClick: this.navigateToProfile,
-          icon: "mdi-account",
-          text: "Profil"
-        },
-        {
-          onClick: this.navigateToMyList,
-          icon: "mdi-briefcase",
-          text: "Mina erbjudanden"
-        },
-        {
-          onClick: this.navigateToChatList,
-          icon: "mdi-forum-outline",
-          text: "Сhattar"
-        },
-        {
-          onClick: this.navigateToLogin,
-          icon: "mdi-exit-run",
-          text: "Utgång"
-        }
-      ]
-    };
-  },
-  computed: {
-    ...mapState(["pageHeaderText", "isSearchBar", "globalSearchString"]),
-    isInsideApp: function() {
-      const isInside = isInsideTheApp(this.$route.path);
-      return isInside;
+    components: {},
+
+    data: function() {
+      return {
+        drawer: null,
+        drawerMenuItems: [
+          {
+            onClick: this.navigateToHome,
+            icon: "search",
+            text: "Sök",
+          },
+          {
+            onClick: this.navigateToWishList,
+            icon: "list",
+            text: "Önskelista",
+          },
+          {
+            onClick: this.navigateToProfile,
+            icon: "mdi-account",
+            text: "Profil",
+          },
+          {
+            onClick: this.navigateToMyList,
+            icon: "mdi-briefcase",
+            text: "Mina erbjudanden",
+          },
+          {
+            onClick: this.navigateToChatList,
+            icon: "mdi-forum-outline",
+            text: "Сhattar",
+          },
+          {
+            onClick: this.navigateToLogin,
+            icon: "mdi-exit-run",
+            text: "Utgång",
+          },
+        ],
+      };
     },
-    searchValue: {
-      get() {
-        return this.globalSearchString;
+    computed: {
+      ...mapState(["pageHeaderText", "isSearchBar", "globalSearchString"]),
+      isInsideApp: function() {
+        const isInside = isInsideTheApp(this.$route.path);
+        return isInside;
       },
-      set(value) {
-        this.setGlobalSearchString(value);
-      }
-    }
-  },
-  created: function() {
-    this.drawer = false;
-  },
-  methods: {
-    ...mapMutations(["setIsDrawerOpened", "setGlobalSearchString"]),
-    toggleDrawer: function() {
-      this.drawer = !this.drawer;
-      this.setIsDrawerOpened(this.drawer);
+      searchValue: {
+        get() {
+          return this.globalSearchString;
+        },
+        set(value) {
+          this.setGlobalSearchString(value);
+        },
+      },
     },
-    navigateToHome: function() {
-      navigationActions.navigateToHome();
-    },
-    navigateToWishList: function() {
-      navigationActions.navigateToWishList();
-    },
-    navigateToProfile: function() {
-      navigationActions.navigateToProfile();
-    },
-    navigateToMyList: function() {
-      navigationActions.navigateToMyItems();
-    },
-    navigateToChatList: function() {
-      navigationActions.navigateToChatList();
-    },
-    navigateToLogin: function() {
+    created: function() {
       this.drawer = false;
-      this.setIsDrawerOpened(this.drawer);
-      navigationActions.navigateToLogin();
-    }
-  },
-  watch: {
-    drawer: function(newVal) {
-      this.setIsDrawerOpened(newVal);
-    }
-  }
-};
+    },
+    methods: {
+      ...mapMutations(["setIsDrawerOpened", "setGlobalSearchString"]),
+      toggleDrawer: function() {
+        this.drawer = !this.drawer;
+        this.setIsDrawerOpened(this.drawer);
+      },
+      navigateToHome: function() {
+        navigationActions.navigateToHome();
+      },
+      navigateToWishList: function() {
+        navigationActions.navigateToWishList();
+      },
+      navigateToProfile: function() {
+        navigationActions.navigateToProfile();
+      },
+      navigateToMyList: function() {
+        navigationActions.navigateToMyItems();
+      },
+      navigateToChatList: function() {
+        navigationActions.navigateToChatList();
+      },
+      navigateToLogin: function() {
+        this.drawer = false;
+        this.setIsDrawerOpened(this.drawer);
+        navigationActions.navigateToLogin();
+      },
+    },
+    watch: {
+      drawer: function(newVal) {
+        this.setIsDrawerOpened(newVal);
+      },
+    },
+  };
 </script>

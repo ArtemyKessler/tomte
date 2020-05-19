@@ -90,6 +90,11 @@ export const refreshFirstPageItems = () => {
   store.commit("refreshFirstPageItems", data);
 };
 
+export const loadItemCards = () => {
+  const data = constants.items;
+  store.commit("setItemCards", data);
+};
+
 export const loadUserChats = () => {
   const data = constants.myChats;
   store.commit("setChatListData", data);

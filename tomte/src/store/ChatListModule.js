@@ -11,6 +11,16 @@ const ChatListModule = {
     chatList(state) {
       return state.chatList;
     },
+    filteredChatList(state) {
+      let otherChats = [];
+      const unreadChats = state.chatList.filter((item) => {
+        if (!item.isUnreadMessages) {
+          otherChats.push(item);
+        }
+        return item.isUnreadMessages;
+      });
+      return [...unreadChats, ...otherChats];
+    },
   },
 };
 

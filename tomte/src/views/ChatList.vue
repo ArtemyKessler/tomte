@@ -1,9 +1,9 @@
 <template>
   <v-container v-on:scroll="onScroll" ref="chatlistContainer">
     <v-row no-gutters>
-      <v-col v-for="(chat, index) in chatList" :key="chat.name" cols="12" sm="4">
-        <v-badge bordered color="error" icon="mdi-lock" overlap></v-badge>
+      <v-col v-for="(chat, index) in filteredChatList" :key="chat.name" cols="12" sm="4">
         <v-card class="mx-1 my-1" max-width="344" outlined>
+          <v-badge v-if="chat.isUnreadMessages" bordered color="error" icon="mdi-message" overlap></v-badge>
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-4">{{index + 1}}</div>
@@ -33,7 +33,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["user", "chatList"])
+    ...mapGetters(["user", "filteredChatList"])
     // user() {
     //   return this.$store.getters.user;
     // },

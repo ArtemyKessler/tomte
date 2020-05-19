@@ -16,10 +16,10 @@ const store = new Vuex.Store({
   state: {
     isDrawerOpen: false,
     isSearchBar: true,
-    globalSearchString: "ASAS",
+    globalSearchString: "",
     pageHeaderText: "Sök",
     lastOpenedCard: {},
-    cards: constants.items,
+    cards: [],
     lastSeenCards: [],
     wishListFilters: constants.wishListFilters,
     lastScrollPosition: 0,
@@ -35,6 +35,9 @@ const store = new Vuex.Store({
     },
     setGlobalSearchString(state, string) {
       state.globalSearchString = string;
+    },
+    setItemCards(state, cards) {
+      state.cards = cards;
     },
     setLastOpenedCard(state, card) {
       state.lastOpenedCard = card;
