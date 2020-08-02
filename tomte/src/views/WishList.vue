@@ -29,7 +29,7 @@
 <script>
 import { mapState } from "vuex";
 import Filters from "../components/filters";
-import WishListItems from "../components/WishListItems";
+import WishListItems from "../components/wishListItems";
 import {
   updateFilterInWishList,
   addFilterToWishList

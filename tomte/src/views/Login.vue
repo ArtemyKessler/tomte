@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <Background></Background>
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -61,12 +62,21 @@
   width: 100%;
   justify-content: space-between;
 }
+
+.background {
+  position: absolute;
+  z-index: -10;
+  width: 100%;
+  height: 100vh;
+}
 </style>
 
 <script>
 import navigationActions from "../router/navigationActions";
 import { login } from "../data/mockupRequests";
+import Background from "../components/3D/loginBackground";
 export default {
+  components: {Background},
   props: {},
   data: () => ({
     login: "hshs@sksk.bi",
